@@ -1,3 +1,5 @@
-<p style="color:black">
-  blog works!
-</p>
+<div>
+  <p *ngFor="let post of posts;" style="color:black; padding: 20px">
+    {{ post.title }}
+  </p>
+</div>
