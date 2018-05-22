@@ -3,13 +3,19 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http'
 
 import { AppComponent } from './app.component';
-import { BlogComponent } from './blog/blog.component';
+import { NavigationComponent } from './navigation/navigation.component';
+import { MainComponent } from './main/main.component';
+import { FooterComponent } from './footer/footer.component';
+import { BlogComponent } from './main/blog/blog.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    BlogComponent
+    NavigationComponent,
+    MainComponent,
+    FooterComponent,
+    BlogComponent,
   ],
   imports: [
     BrowserModule,
@@ -18,8 +24,10 @@ import { BlogComponent } from './blog/blog.component';
   providers: [],
 
   bootstrap: [
-    AppComponent, 
-    BlogComponent
+    AppComponent,
+    NavigationComponent,
+    MainComponent,
+    FooterComponent
   ]
 })
 export class AppModule { }
