@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { RouterModule, Routes } from '@angular/router';
 import 'rxjs/add/operator/map'
 
 @Component({
