@@ -25,6 +25,7 @@ export class LoginService {
     return this.http.post('http://localhost:8080/login', member).subscribe(
       res => {
         if (res) {
+          this.loginModel.userName = member.login;
           this.loginModel.isUserLogged = true;
           this.loginModel.loginErrors = [];
           this.router.navigate(['/user/blog']);

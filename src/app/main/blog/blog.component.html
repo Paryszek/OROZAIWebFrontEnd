@@ -3,17 +3,19 @@
     <!-- Blog Entries Column -->
     <div class="col-md-12">
       <h1 class="my-4">Blog</h1>
+      <div class="card mb-4">
+        <input type="text" class="form-control" [(ngModel)]="filter" placeholder="Search for posts"/>
+      </div>
       <!-- Blog Post -->
-      <div class="card mb-4" *ngFor="let post of posts;">
+      <div class="card mb-4" *ngFor="let post of filterFunction(post);">
         <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
         <div class="card-body">
           <h2 class="card-title">{{ post.title }}</h2>
           <p class="card-text">{{ post.body }}</p>
-          <a href="#" class="btn btn-primary">Read More &rarr;</a>
+          <!-- <a href="#" class="btn btn-primary">Read More &rarr;</a> -->
         </div>
         <div class="card-footer text-muted">
-          Posted on January 1, 2017 by
-          <a href="#">Start Bootstrap</a>
+          Posted on {{post.dateCreated}} by {{post.owner}}
         </div>
       </div>
     </div>

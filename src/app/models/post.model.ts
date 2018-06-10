@@ -1,4 +1,5 @@
 export class Post {
+    id: number;
     title: string;
     body: string;
     owner: string;
@@ -8,6 +9,6 @@ export class Post {
         this.body = body;
         this.owner = owner;
         this.dateCreated = dateCreated;
-        
+
     }
 }
