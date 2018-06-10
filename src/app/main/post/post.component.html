@@ -10,6 +10,11 @@
         <input name="body" [(ngModel)]="body" class="form-control" placeholder="Body" />                                        
     </div>
 
+    <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+      <input type="file" name="image" (change)="onImageUpload($event)" class="form-control" />                                        
+  </div>
+
     <button (click)="pushPost()" class="btn btn-primary">Publish</button>
   </div>
 </div>

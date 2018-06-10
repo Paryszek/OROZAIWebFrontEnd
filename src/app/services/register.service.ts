@@ -26,7 +26,7 @@ export class RegisterService {
       },
       err => {
         console.log(err);
-        this.registerModel.registerErrors.push('Server is not responding', 'Register error');
+        this.registerModel.registerErrors.push('Register error, Server is not responding');
       }
     );
   }

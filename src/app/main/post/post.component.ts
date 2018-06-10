@@ -16,15 +16,28 @@ export class PostComponent implements OnInit {
   body: string;
   owner: string;
   dateCreated: string;
+  image: any;
+  maxFileSize: number = 5000000;
   
   constructor(private postService: PostService, private toastr: ToastrService, private loginService: LoginService) {}
   
   ngOnInit() {}
 
+  public onImageUpload(event: any) {
+    if (event.target.files[0].size < this.maxFileSize) {
+      this.image = event.target.files[0];
+    } else {
+      this.toastr.error("Error, file is to big sizes only less than 5mb");
+    }
+  }
   public pushPost() {
-    if (this.title && this.body && this.title.length != 0 && this.body.length != 0) {
-      let post = new Post(this.title, this.body, this.loginService.getDataModel().userName, new Date().toString());
-      this.postService.pushPost(post);
+    if (this.title && this.body && this.title.length && this.body.length != 0) {
+      if (this.image && this.image.type === 'image/jpeg') {
+        let post = new Post(this.title, this.body, this.loginService.getDataModel().userName, new Date().toString(), this.image);
+        this.postService.pushPost(post);
+      } else {
+        this.toastr.error("Error, upload file or make sure format is image/jpeg");
+      }
     } else {
       this.toastr.error("Error, please fill all the fields");
     }

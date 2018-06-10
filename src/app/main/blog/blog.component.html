@@ -17,6 +17,7 @@
         <div class="card-footer text-muted">
           Posted on {{post.dateCreated}} by {{post.owner}}
         </div>
+        <button *ngIf="role === 'ADMIN'" type="button" (click)="removePost(post.id)" class="btn btn-danger">Remove</button>
       </div>
     </div>
   </div>

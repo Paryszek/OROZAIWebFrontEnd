@@ -37,7 +37,7 @@ export class LoginService {
       err => {
         console.log(err);
         this.loginModel.isUserLogged = false;
-        this.loginModel.loginErrors.push('Login error!', 'Server is not responding');
+        this.loginModel.loginErrors.push('Login error! Server is not responding');
       }
     );
   }
