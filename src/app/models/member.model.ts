@@ -3,8 +3,8 @@ export class Member {
     lastName: string;
     login: string;
     password: string;
-    birthDate: Date;
-    constructor(firstName: string, lastName: string, login: string, password: string, birthDate: Date) {
+    birthDate: string;
+    constructor(firstName: string, lastName: string, login: string, password: string, birthDate: string) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.login = login;

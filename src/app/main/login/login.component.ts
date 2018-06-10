@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../services/login.service';
 import { ToastrService } from 'ngx-toastr';
-import { MemberLogin } from '../../models/member';
-import { LoginModel } from '../../models/login-model';
+import { MemberLogin } from '../../models/member.model';
+import { LoginModel } from '../../models/login.model';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  providers: [ LoginService ],
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
@@ -21,7 +20,8 @@ export class LoginComponent implements OnInit {
   }
 
   loginUser() {
-    if (this.login && this.password && this.login.length !== 0 && this.password.length !== 0) {
+    if (this.login && this.password && this.login.length !== 0 && this.password.length !== 0) 
+    {
       const member: MemberLogin = new MemberLogin(this.login, this.password);
       this.loginService.loginMember(member);
     } else {

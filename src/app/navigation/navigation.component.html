@@ -1,24 +1,30 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="#">Start Bootstrap</a>
+    <a class="navbar-brand" routerLink="/" href="#">My blog</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
-          <a class="nav-link" routerLink="/" href="#">Home
+          <a *ngIf="!loginModel.isUserLogged" class="nav-link" routerLink="/" href="#">Home
             <span class="sr-only">(current)</span>
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/blog" href="#">Blog</a>
+        <li *ngIf="loginModel.isUserLogged" class="nav-item">
+          <a routerLink="/user/post" class="nav-link" href="#">Post</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Login</a>
+        <li *ngIf="loginModel.isUserLogged" class="nav-item">
+          <a routerLink="/user/blog" class="nav-link" href="#">Blog</a>
+        </li>
+        <li *ngIf="!loginModel.isUserLogged" class="nav-item">
+          <a  routerLink="/login" class="nav-link" href="#">Login</a>
+        </li>
+        <li *ngIf="loginModel.isUserLogged" class="nav-item">
+          <a  routerLink="/logout" class="nav-link" href="#">Logout</a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
-<div style="margin-bottom: 60px"></div>
+<div style="margin-bottom: 70px"></div>
