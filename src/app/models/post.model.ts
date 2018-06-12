@@ -4,8 +4,8 @@ export class Post {
     body: string;
     owner: string;
     dateCreated: string;
-    image: any;
-    constructor(title: string, body: string, owner: string, dateCreated: string, image: any) {
+    image: string;
+    constructor(title: string, body: string, owner: string, dateCreated: string, image: string) {
         this.title = title;
         this.body = body;
         this.owner = owner;

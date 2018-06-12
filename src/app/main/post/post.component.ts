@@ -14,33 +14,27 @@ import { LoginService } from '../../services/login.service'
 export class PostComponent implements OnInit {
   title: string;
   body: string;
-  owner: string;
-  dateCreated: string;
-  image: any;
-  maxFileSize: number = 5000000;
+  image: string;
   
   constructor(private postService: PostService, private toastr: ToastrService, private loginService: LoginService) {}
   
   ngOnInit() {}
 
-  public onImageUpload(event: any) {
-    if (event.target.files[0].size < this.maxFileSize) {
-      this.image = event.target.files[0];
-    } else {
-      this.toastr.error("Error, file is to big sizes only less than 5mb");
-    }
-  }
   public pushPost() {
-    if (this.title && this.body && this.title.length && this.body.length != 0) {
-      if (this.image && this.image.type === 'image/jpeg') {
+    if (this.title && this.body && this.image && this.title.length && this.body.length != 0 && this.image.length != 0) {
+      if (this.isImageValid(this.image)) {
         let post = new Post(this.title, this.body, this.loginService.getDataModel().userName, new Date().toString(), this.image);
         this.postService.pushPost(post);
       } else {
-        this.toastr.error("Error, upload file or make sure format is image/jpeg");
+        this.toastr.error("Error, please insert valid image url");
       }
     } else {
       this.toastr.error("Error, please fill all the fields");
     }
+  }
+
+  private isImageValid(image: string) {
+    return image.match(/\.(jpeg|jpg|gif|png)$/) != null;
   }
 
 }
