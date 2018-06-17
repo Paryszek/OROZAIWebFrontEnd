@@ -15,6 +15,8 @@ export class BlogComponent implements OnInit {
   role: string;
   posts: Post[];
   filter: string;
+  pages: string[] = ['all', '15', '10', '5', '1']
+  count: number = 0;
 
   constructor(private loginService: LoginService, 
               private blogService: BlogService) {
@@ -31,7 +33,7 @@ export class BlogComponent implements OnInit {
   }
 
   public removePost(id: number) {
-    this.blogService.removePost(id);
+    this.blogService.removePost(id, this.count);
   }
   
   public filterFunction() {
@@ -44,6 +46,28 @@ export class BlogComponent implements OnInit {
     } else {
       return this.posts;
     }
-    
+  }
+  public onPagesChange(value: string) {
+    switch(value) {
+      case 'all': 
+        this.count = 0;
+      break;
+      case '15': 
+        this.count = 15;   
+      break;
+      case '10': 
+        this.count = 10;    
+      break;
+      case '5': 
+        this.count = 5;    
+      break;
+      case '1': 
+        this.count = 1;    
+      break;
+      default:
+        this.count = 0; 
+      break;
+    }
+    this.blogService.initPosts(this.count);
   }
 }

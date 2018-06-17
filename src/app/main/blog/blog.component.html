@@ -19,6 +19,11 @@
         </div>
         <button *ngIf="role === 'ADMIN'" type="button" (click)="removePost(post.id)" class="btn btn-danger">Remove</button>
       </div>
+      <div class="card mb-4">
+        <select (change)="onPagesChange($event.target.value)">
+          <option *ngFor="let page of pages" [ngValue]="page">{{page}}</option>
+        </select>
+      </div>
     </div>
   </div>
   <!-- /.row -->

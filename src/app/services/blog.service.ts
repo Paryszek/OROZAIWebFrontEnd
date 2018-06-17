@@ -9,15 +9,14 @@ import _ = require('lodash');
 export class BlogService {
   postsViewModel: Post[] = [];
   constructor(private http: HttpClient, private toastr: ToastrService) {
-    this.initPosts();
+    this.initPosts(0);
    }
-  public removePost(id: number) {
+  public removePost(id: number, count: number) {
     return this.http.post('http://localhost:8080/removepost', id).subscribe(
       res => {
         if (res) {
           this.toastr.success('Post removed');
-          this.postsViewModel.length = 0;
-          this.initPosts();
+          this.initPosts(count);
         }
       },
       err => {
@@ -31,8 +30,9 @@ export class BlogService {
     return this.postsViewModel;
   }
 
-  private initPosts(): any {
-    return this.http.get<any>('http://localhost:8080/posts').map((res: Response) => res).subscribe(val => {
+  public initPosts(count: number): any {
+    this.postsViewModel.length = 0;
+    return this.http.get<any>('http://localhost:8080/posts?count=' + count).map((res: Response) => res).subscribe(val => {
       this.mapResponseToPostsViewModel(val);
     });
   }
