@@ -23,7 +23,7 @@ export class PostComponent implements OnInit {
   public pushPost() {
     if (this.title && this.body && this.image && this.title.length && this.body.length != 0 && this.image.length != 0) {
       if (this.isImageValid(this.image)) {
-        let post = new Post(this.title, this.body, this.loginService.getDataModel().userName, new Date().toString(), this.image);
+        let post = new Post(undefined, this.title, this.body, this.loginService.getLoginViewModel().userName, new Date().toString(), this.image);
         this.postService.pushPost(post);
       } else {
         this.toastr.error("Error, please insert valid image url");

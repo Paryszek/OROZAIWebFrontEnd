@@ -12,7 +12,7 @@ export class LogoutComponent implements OnInit {
   constructor(private router: Router, private loginService: LoginService) { }
 
   ngOnInit() {
-    this.loginService.loginModel.isUserLogged = false;
+    this.loginService.loginViewModel.isUserLogged = false;
     let self = this;
     setTimeout(() => { self.router.navigate(['/']) }, 5000);
   }

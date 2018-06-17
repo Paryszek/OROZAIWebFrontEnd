@@ -11,17 +11,16 @@ import { LoginModel } from '../../models/login.model';
 export class LoginComponent implements OnInit {
   login: any;
   password: any;
-  loginModel: LoginModel;
+  loginViewModel: LoginModel;
   constructor(private loginService: LoginService,
               private toastr: ToastrService) { }
 
   ngOnInit() {
-    this.loginModel = this.loginService.getDataModel();
+    this.loginViewModel = this.loginService.getLoginViewModel();
   }
 
   loginUser() {
-    if (this.login && this.password && this.login.length !== 0 && this.password.length !== 0) 
-    {
+    if (this.login && this.password && this.login.length !== 0 && this.password.length !== 0) {
       const member: MemberLogin = new MemberLogin(this.login, this.password);
       this.loginService.loginMember(member);
     } else {

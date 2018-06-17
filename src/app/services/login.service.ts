@@ -6,38 +6,48 @@ import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Router } from "@angular/router";
 @Injectable()
 export class LoginService {
-  loginModel: LoginModel;
+  loginViewModel: LoginModel;
   constructor(private http: HttpClient, private router: Router) {
-    this.loginModel = new LoginModel();
+    this.loginViewModel = new LoginModel();
   }
   public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    return this.loginModel.isUserLogged;
+    return this.loginViewModel.isUserLogged;
   }
 
   canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     return this.canActivate(route, state);
   }
   
-  public getDataModel(): LoginModel {
-    return this.loginModel;
+  public getLoginViewModel(): LoginModel {
+    return this.loginViewModel;
   }
   public loginMember(member: MemberLogin) {
     return this.http.post('http://localhost:8080/login', member).subscribe(
       res => {
         if (res) {
-          this.loginModel.userName = member.login;
-          this.loginModel.isUserLogged = true;
-          this.loginModel.loginErrors = [];
+          this.loginViewModel.userName = member.login;
+          this.loginViewModel.isUserLogged = true;
+          this.loginViewModel.loginErrors = [];
           this.router.navigate(['/user/blog']);
         } else {
-          this.loginModel.isUserLogged = false;
-          this.loginModel.loginErrors.push('Login error! Wrong login or password. Please try again.');
+          this.loginViewModel.isUserLogged = false;
+          this.loginViewModel.loginErrors.push('Login error! Wrong login or password. Please try again.');
         }
       },
       err => {
         console.log(err);
-        this.loginModel.isUserLogged = false;
-        this.loginModel.loginErrors.push('Login error! Server is not responding');
+        this.loginViewModel.isUserLogged = false;
+        this.loginViewModel.loginErrors.push('Login error! Server is not responding');
+      }
+    );
+  }
+  public getRoles(): any{
+    return this.http.get<any>('http://localhost:8080/role', 
+      {
+        params: {
+          login: this.loginViewModel.userName,
+        },
+        observe: 'response'
       }
     );
   }
