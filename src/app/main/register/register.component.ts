@@ -27,13 +27,17 @@ export class RegisterComponent implements OnInit {
 
   registerMember(): void {
     if (this.firstName && this.lastName && this.login && this.birthDate
-      && this.validateInputData(this.firstName, this.lastName, this.login)) 
+      && this.validateInputData(this.firstName, this.lastName, this.login))
     {
-      if (this.password && this.validatePassword(this.password)) {
-        const member = new Member(this.firstName, this.lastName, this.login, this.password, this.birthDate.toString());
-        this.registerService.registerMember(member);
+      if (this.getAge(this.birthDate) > 18) {
+        if (this.password && this.validatePassword(this.password)) {
+          const member = new Member(undefined, this.firstName, this.lastName, this.login, this.password, this.birthDate.toString());
+          this.registerService.registerMember(member);
+        } else {
+          this.toastr.error('Make sure password length is greater than 8', 'Register Error');
+        }
       } else {
-        this.toastr.error('Make sure password length is greater than 8', 'Register Error');
+        this.toastr.error('Make sure birthdate is correct', 'Register Error');
       }
     } else {
       this.toastr.error('Make sure that every field is filled', 'Register Error');
@@ -46,6 +50,17 @@ export class RegisterComponent implements OnInit {
 
   private validatePassword(password: string) {
     return password.length >= 8;
+  }
+
+  private getAge(birthDate: Date) {
+    const todayDate = new Date();
+    const m = todayDate.getMonth() - new Date(birthDate).getMonth();
+    let age = todayDate.getFullYear() - new Date(birthDate).getFullYear();
+
+    if (m < 0 || (m === 0 && todayDate.getDate() < new Date(birthDate).getDate())) {
+        age--;
+    }
+    return age;
   }
 
 }

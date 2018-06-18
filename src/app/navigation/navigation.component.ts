@@ -11,6 +11,7 @@ export class NavigationComponent implements OnInit {
 
   constructor(private loginService: LoginService) { }
   loginModel: LoginModel;
+  role: string;
   ngOnInit() {
     this.loginModel = this.loginService.getLoginViewModel();
   }

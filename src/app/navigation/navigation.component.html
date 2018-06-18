@@ -17,6 +17,9 @@
         <li *ngIf="loginModel.isUserLogged" class="nav-item">
           <a routerLink="/user/blog" class="nav-link" href="#">Blog</a>
         </li>
+        <li *ngIf="loginModel.isUserLogged && loginModel.role === 'ADMIN'" class="nav-item">
+          <a routerLink="/user/admin" class="nav-link" href="#">Admin</a>
+        </li>
         <li *ngIf="!loginModel.isUserLogged" class="nav-item">
           <a  routerLink="/login" class="nav-link" href="#">Login</a>
         </li>

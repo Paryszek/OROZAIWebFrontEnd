@@ -1,0 +1,17 @@
+<div class="container" style="margin-top:100px; margin-bottom: 30px;">
+  <div style="padding-bottom:20px;" class="row col-md-12">
+      <h4>Remove users</h4>
+  </div>
+  <div *ngFor="let error of adminViewModel.adminErrors" class="alert alert-danger" role="alert">
+    {{ error }}
+  </div>
+  <div *ngFor="let user of adminViewModel.users">
+    <p *ngIf="user.login !== 'admin'">
+      First name: {{user.firstName}} Last name: {{user.lastName}} 
+      <button type="button" (click)="removeUser(user.id)" class="btn btn-danger">Remove</button>
+    </p>
+    <p *ngIf="adminViewModel.users.length === 1 && adminViewModel.users[0].login === 'admin'">
+      There are no more users. List is empty.
+    </p>
+  </div>
+</div>
